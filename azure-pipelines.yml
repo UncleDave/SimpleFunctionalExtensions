@@ -1,0 +1,18 @@
+variables:
+  version: 0.0.1
+
+pool:
+  vmImage: ubuntu-16.04
+
+name: $(version)$(Rev:.r)
+
+steps:
+  - script: dotnet restore
+    displayName: dotnet restore
+  - script: dotnet build -c Release --no-restore /p:Version=$(Build.BuildNumber) /p:InformationalVersion=$(version)
+    displayName: dotnet build
+  - script: dotnet pack -c Release -o $(Build.ArtifactStagingDirectory) --no-build /p:PackageVersion=$(version)
+    displayName: dotnet pack
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: $(Build.DefinitionName)-$(Build.BuildNumber)
