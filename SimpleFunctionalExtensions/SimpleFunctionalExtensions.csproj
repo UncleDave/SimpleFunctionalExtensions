@@ -2,8 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Author>Dave Pringle</Author>
+    <Authors>UncleDave</Authors>
     <Description>Simple functional extensions for C#. Lightweight and doesn't hold your hand.</Description>
+    <RepositoryUrl>https://github.com/UncleDave/SimpleFunctionalExtensions</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Functional;Result</PackageTags>
   </PropertyGroup>
 
 </Project>
