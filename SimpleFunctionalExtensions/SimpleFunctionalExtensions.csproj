@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>UncleDave</Authors>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Authors>Dave Pringle</Authors>
+    <Copyright>Copyright (c) 2019 Dave Pringle</Copyright>
     <Description>Simple functional extensions for C#. Lightweight and doesn't hold your hand.</Description>
     <RepositoryUrl>https://github.com/UncleDave/SimpleFunctionalExtensions</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

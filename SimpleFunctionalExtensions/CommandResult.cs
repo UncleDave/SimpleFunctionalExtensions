@@ -17,8 +17,8 @@
 
         public CommandResult(T error) : base(false) => Error = error;
 
-        public static ICommandResult Ok() => new CommandResult<T>(true);
+        public static ICommandResult<T> Ok() => new CommandResult<T>(true);
 
-        public static ICommandResult Fail(T error) => new CommandResult<T>(error);
+        public static ICommandResult<T> Fail(T error) => new CommandResult<T>(error);
     }
 }
