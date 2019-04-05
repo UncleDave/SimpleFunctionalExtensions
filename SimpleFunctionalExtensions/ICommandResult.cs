@@ -7,7 +7,7 @@
         bool IsFailure { get; }
     }
 
-    public interface ICommandResult<out T>
+    public interface ICommandResult<out T> : ICommandResult
     {
         T Error { get; }
     }

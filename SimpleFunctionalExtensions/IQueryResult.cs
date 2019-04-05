@@ -5,8 +5,7 @@
         T Value { get; }
     }
 
-    public interface IQueryResult<out TValue, out TError> : IQueryResult<TValue>
+    public interface IQueryResult<out TValue, out TError> : IQueryResult<TValue>, ICommandResult<TError>
     {
-        TError Error { get; }
     }
 }
