@@ -1,6 +1,6 @@
 ﻿namespace SimpleFunctionalExtensions
 {
-    public abstract class ValueResult<T> : Result, IQueryResult<T>
+    public abstract class ValueResult<T> : Result, IValueResult<T>
     {
         public T Value { get; }
 

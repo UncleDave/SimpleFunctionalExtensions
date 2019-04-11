@@ -1,11 +1,14 @@
-﻿namespace SimpleFunctionalExtensions
+﻿using System;
+
+namespace SimpleFunctionalExtensions
 {
-    public interface IQueryResult<out T> : ICommandResult
+    public interface IQueryResult<out T> : IValueResult<T>
     {
-        T Value { get; }
+        IQueryResult<TResult> Map<TResult>(Func<T, TResult> mapper);
     }
 
-    public interface IQueryResult<out TValue, out TError> : IQueryResult<TValue>, ICommandResult<TError>
+    public interface IQueryResult<out TValue, out TError> : ICommandResult<TError>, IValueResult<TValue>
     {
+        IQueryResult<TResult, TError> Map<TResult>(Func<TValue, TResult> mapper);
     }
 }
