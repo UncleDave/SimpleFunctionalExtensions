@@ -2,7 +2,7 @@ variables:
   version: 0.0.7
 
 pool:
-  vmImage: ubuntu-16.04
+  vmImage: windows-2019
 
 name: $(version)$(Rev:.r)
 
@@ -11,6 +11,12 @@ steps:
     displayName: dotnet restore
   - script: dotnet build -c Release --no-restore /p:Version=$(Build.BuildNumber) /p:InformationalVersion=$(version)
     displayName: dotnet build
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: test
+      projects: '**/*Tests.csproj'
+      arguments: -c Release --no-build --collect "Code coverage"
+    displayName: dotnet test
   - script: dotnet pack -c Release -o $(Build.ArtifactStagingDirectory) --no-build /p:PackageVersion=$(version)
     displayName: dotnet pack
   - task: PublishBuildArtifacts@1
