@@ -23,6 +23,14 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
+        public void StaticOk_ReturnsICommandResult_WithNullError()
+        {
+            var result = CommandResult<object>.Ok();
+
+            Null(result.Error);
+        }
+
+        [Fact]
         public void StaticFail_ReturnsICommandResult_WithIsSuccessSetToFalse()
         {
             var result = CommandResult<object>.Fail(new { });
