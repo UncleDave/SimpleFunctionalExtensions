@@ -15,7 +15,7 @@ steps:
     inputs:
       command: test
       projects: '**/*Tests.csproj'
-      arguments: -c Release --no-build
+      arguments: -c Release --no-build --collect "Code coverage"
     displayName: dotnet test
   - script: dotnet pack -c Release -o $(Build.ArtifactStagingDirectory) --no-build /p:PackageVersion=$(version)
     displayName: dotnet pack
