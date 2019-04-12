@@ -7,6 +7,7 @@
     <Authors>Dave Pringle</Authors>
     <Copyright>Copyright (c) 2019 Dave Pringle</Copyright>
     <Description>Simple functional extensions for C#. Lightweight and doesn't hold your hand.</Description>
+    <PackageProjectUrl>https://github.com/UncleDave/SimpleFunctionalExtensions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/UncleDave/SimpleFunctionalExtensions</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Functional;Result</PackageTags>
