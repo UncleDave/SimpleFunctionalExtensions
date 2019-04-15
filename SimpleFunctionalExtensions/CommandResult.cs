@@ -1,7 +1,7 @@
 ﻿namespace SimpleFunctionalExtensions
 {
     /// <inheritdoc cref="ICommandResult"/>
-    public class CommandResult : Result
+    public class CommandResult : Result, ICommandResult
     {
         private CommandResult(bool isSuccess) : base(isSuccess) { }
 

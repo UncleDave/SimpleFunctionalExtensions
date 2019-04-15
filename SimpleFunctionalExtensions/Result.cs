@@ -1,6 +1,6 @@
 ﻿namespace SimpleFunctionalExtensions
 {
-    public abstract class Result : ICommandResult
+    public abstract class Result : IResult
     {
         public bool IsSuccess { get; }
 

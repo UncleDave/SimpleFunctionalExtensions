@@ -1,6 +1,6 @@
 ﻿namespace SimpleFunctionalExtensions
 {
-    public interface IValueResult<out T> : ICommandResult
+    public interface IValueResult<out T> : IResult
     {
         T Value { get; }
     }
