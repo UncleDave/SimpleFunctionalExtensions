@@ -18,5 +18,19 @@ namespace SimpleFunctionalExtensions
 
             return result.Map(mapper);
         }
+
+        public static async Task<IQueryResult<T>> ToQueryResultAsync<T>(this Task<ICommandResult> task, T value)
+        {
+            var result = await task;
+
+            return result.ToQueryResult(value);
+        }
+
+        public static async Task<IQueryResult<TResult, TError>> ToQueryResultAsync<TResult, TError>(this Task<ICommandResult<TError>> task, TResult value)
+        {
+            var result = await task;
+
+            return result.ToQueryResult(value);
+        }
     }
 }
