@@ -16,12 +16,14 @@
         /// </summary>
         /// <returns>A new <see cref="ICommandResult"/> in the failure state.</returns>
         public static ICommandResult Fail() => new CommandResult(false);
+
+        public IQueryResult<T> ToQueryResult<T>(T value) => IsSuccess ? QueryResult<T>.Ok(value) : QueryResult<T>.Fail();
     }
 
     /// <inheritdoc cref="ICommandResult{T}"/>
     public class CommandResult<T> : Result, ICommandResult<T>
     {
-        /// <inheritdoc cref="ICommandResult{T}.Error"/>
+        /// <inheritdoc cref="IErrorResult{T}.Error"/>
         public T Error { get; }
 
         private CommandResult() : base(true) { }
@@ -37,5 +39,7 @@
         /// <param name="error">The error that caused the failure.</param>
         /// <returns>A new <see cref="ICommandResult"/> in the failure state with the given error.</returns>
         public static ICommandResult<T> Fail(T error) => new CommandResult<T>(error);
+
+        public IQueryResult<TResult, T> ToQueryResult<TResult>(TResult value) => IsSuccess ? QueryResult<TResult, T>.Ok(value) : QueryResult<TResult, T>.Fail(Error);
     }
 }

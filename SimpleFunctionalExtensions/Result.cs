@@ -6,6 +6,6 @@
 
         public bool IsFailure => !IsSuccess;
 
-        protected Result(bool isSuccess) => IsSuccess = isSuccess;
+        protected internal Result(bool isSuccess) => IsSuccess = isSuccess;
     }
 }

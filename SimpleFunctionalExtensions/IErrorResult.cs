@@ -9,7 +9,7 @@
     {
         /// <summary>
         /// The error that caused this <see cref="IErrorResult{T}"/> to fail.
-        /// Null if <see cref="IErrorResult{T}.IsSuccess"/> is true.
+        /// Null if <see cref="IResult.IsSuccess"/> is true.
         /// </summary>
         T Error { get; }
     }

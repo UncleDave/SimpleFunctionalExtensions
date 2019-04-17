@@ -6,6 +6,6 @@
 
         protected ValueResult(bool isSuccess) : base(isSuccess) { }
 
-        protected ValueResult(T value) : base(true) => Value = value;
+        protected internal ValueResult(T value) : base(true) => Value = value;
     }
 }
