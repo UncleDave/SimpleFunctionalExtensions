@@ -13,6 +13,8 @@ namespace SimpleFunctionalExtensions
         public static IQueryResult<T> Fail() => new QueryResult<T>();
 
         public IQueryResult<TResult> Map<TResult>(Func<T, TResult> mapper) => IsSuccess ? new QueryResult<TResult>(mapper(Value)) : new QueryResult<TResult>();
+
+        public static implicit operator QueryResult<T>(T value) => new QueryResult<T>(value);
     }
 
     public class QueryResult<TValue, TError> : ValueResult<TValue>, IQueryResult<TValue, TError>
@@ -29,5 +31,7 @@ namespace SimpleFunctionalExtensions
 
         public IQueryResult<TResult, TError> Map<TResult>(Func<TValue, TResult> mapper) =>
             IsSuccess ? new QueryResult<TResult, TError>(mapper(Value)) : new QueryResult<TResult, TError>(Error);
+
+        public static implicit operator QueryResult<TValue, TError>(TValue value) => new QueryResult<TValue, TError>(value);
     }
 }
