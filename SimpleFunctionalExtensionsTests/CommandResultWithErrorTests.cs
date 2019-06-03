@@ -120,5 +120,23 @@ namespace SimpleFunctionalExtensionsTests
 
             Null(result.Value);
         }
+
+        [Fact]
+        public void Catch_OnSuccessfulResult_ReturnsCorrectICommandResult()
+        {
+            var originalResult = CommandResult<object>.Ok();
+            var result = originalResult.Catch(CommandResult<object>.Fail);
+
+            Same(originalResult, result);
+        }
+
+        [Fact]
+        public void Catch_OnFailedResult_ReturnsCorrectICommandResult()
+        {
+            var handledResult = CommandResult<object>.Ok();
+            var result = CommandResult<object>.Fail(new { }).Catch(e => handledResult);
+
+            Same(handledResult, result);
+        }
     }
 }
