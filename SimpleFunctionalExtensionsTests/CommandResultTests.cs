@@ -7,7 +7,7 @@ namespace SimpleFunctionalExtensionsTests
     public class CommandResultTests
     {
         [Fact]
-        public void StaticOk_ReturnsICommandResult_WithIsSuccessSetToTrue()
+        public void StaticOk_ReturnsCommandResult_WithIsSuccessSetToTrue()
         {
             var result = CommandResult.Ok();
 
@@ -15,7 +15,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticOk_ReturnsICommandResult_WithIsFailureSetToFalse()
+        public void StaticOk_ReturnsCommandResult_WithIsFailureSetToFalse()
         {
             var result = CommandResult.Ok();
 
@@ -23,7 +23,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticFail_ReturnsICommandResult_WithIsSuccessSetToFalse()
+        public void StaticFail_ReturnsCommandResult_WithIsSuccessSetToFalse()
         {
             var result = CommandResult.Fail();
 
@@ -31,7 +31,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticFail_ReturnsICommandResult_WithIsFailureSetToTrue()
+        public void StaticFail_ReturnsCommandResult_WithIsFailureSetToTrue()
         {
             var result = CommandResult.Fail();
 
@@ -39,7 +39,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnSuccessfulResult_ReturnsIQueryResult_WithIsSuccessSetToTrue()
+        public void ToQueryResult_OnSuccessfulResult_ReturnsQueryResult_WithIsSuccessSetToTrue()
         {
             var result = CommandResult.Ok().ToQueryResult(new { });
 
@@ -47,7 +47,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnSuccessfulResult_ReturnsIQueryResult_WithIsFailureSetToFalse()
+        public void ToQueryResult_OnSuccessfulResult_ReturnsQueryResult_WithIsFailureSetToFalse()
         {
             var result = CommandResult.Ok().ToQueryResult(new { });
 
@@ -55,7 +55,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnSuccessfulResult_ReturnsIQueryResult_WithCorrectValue()
+        public void ToQueryResult_OnSuccessfulResult_ReturnsQueryResult_WithCorrectValue()
         {
             var value = new { };
             var result = CommandResult.Ok().ToQueryResult(value);
@@ -64,7 +64,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnFailedResult_ReturnsIQueryResult_WithIsSuccessSetToFalse()
+        public void ToQueryResult_OnFailedResult_ReturnsQueryResult_WithIsSuccessSetToFalse()
         {
             var result = CommandResult.Fail().ToQueryResult(new { });
 
@@ -72,7 +72,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnFailedResult_ReturnsIQueryResult_WithIsFailureSetToTrue()
+        public void ToQueryResult_OnFailedResult_ReturnsQueryResult_WithIsFailureSetToTrue()
         {
             var result = CommandResult.Fail().ToQueryResult(new { });
 
@@ -80,7 +80,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void ToQueryResult_OnFailedResult_ReturnsIQueryResult_WithNullValue()
+        public void ToQueryResult_OnFailedResult_ReturnsQueryResult_WithNullValue()
         {
             var result = CommandResult.Fail().ToQueryResult(new { });
 
@@ -88,7 +88,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Catch_OnSuccessfulResult_ReturnsCorrectICommandResult()
+        public void Catch_OnSuccessfulResult_ReturnsCorrectCommandResult()
         {
             var originalResult = CommandResult.Ok();
             var result = originalResult.Catch(CommandResult.Fail);
@@ -97,7 +97,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Catch_OnFailedResult_ReturnsCorrectICommandResult()
+        public void Catch_OnFailedResult_ReturnsCorrectCommandResult()
         {
             var handledResult = CommandResult.Ok();
             var result = CommandResult.Fail().Catch(() => handledResult);

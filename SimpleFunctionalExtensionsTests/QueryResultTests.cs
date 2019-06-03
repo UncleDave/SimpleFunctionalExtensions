@@ -7,7 +7,7 @@ namespace SimpleFunctionalExtensionsTests
     public class QueryResultTests
     {
         [Fact]
-        public void StaticOk_ReturnsIQueryResult_WithIsSuccessSetToTrue()
+        public void StaticOk_ReturnsQueryResult_WithIsSuccessSetToTrue()
         {
             var result = QueryResult<object>.Ok(new { });
 
@@ -15,7 +15,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticOk_ReturnsIQueryResult_WithIsFailureSetToFalse()
+        public void StaticOk_ReturnsQueryResult_WithIsFailureSetToFalse()
         {
             var result = QueryResult<object>.Ok(new { });
 
@@ -23,7 +23,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticOk_ReturnsIQueryResult_WithCorrectValue()
+        public void StaticOk_ReturnsQueryResult_WithCorrectValue()
         {
             var value = new { };
             var result = QueryResult<object>.Ok(value);
@@ -32,7 +32,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticFail_ReturnsIQueryResult_WithIsSuccessSetToFalse()
+        public void StaticFail_ReturnsQueryResult_WithIsSuccessSetToFalse()
         {
             var result = QueryResult<object>.Fail();
 
@@ -40,7 +40,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticFail_ReturnsIQueryResult_WithIsFailureSetToTrue()
+        public void StaticFail_ReturnsQueryResult_WithIsFailureSetToTrue()
         {
             var result = QueryResult<object>.Fail();
 
@@ -48,7 +48,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void StaticFail_ReturnsIQueryResult_WithNullValue()
+        public void StaticFail_ReturnsQueryResult_WithNullValue()
         {
             var result = QueryResult<object>.Fail();
 
@@ -56,7 +56,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnSuccessfulResult_ReturnsIQueryResult_WithIsSuccessSetToTrue()
+        public void Map_OnSuccessfulResult_ReturnsQueryResult_WithIsSuccessSetToTrue()
         {
             var result = QueryResult<object>.Ok(new { }).Map(x => new { });
 
@@ -64,7 +64,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnSuccessfulResult_ReturnsIQueryResult_WithIsFailureSetToFalse()
+        public void Map_OnSuccessfulResult_ReturnsQueryResult_WithIsFailureSetToFalse()
         {
             var result = QueryResult<object>.Ok(new { }).Map(x => new { });
 
@@ -72,7 +72,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnSuccessfulResult_ReturnsIQueryResult_WithCorrectValue()
+        public void Map_OnSuccessfulResult_ReturnsQueryResult_WithCorrectValue()
         {
             var value = new { };
             var result = QueryResult<object>.Ok(new { }).Map(x => value);
@@ -81,7 +81,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnFailedResult_ReturnsIQueryResult_WithIsSuccessSetToFalse()
+        public void Map_OnFailedResult_ReturnsQueryResult_WithIsSuccessSetToFalse()
         {
             var result = QueryResult<object>.Fail().Map(x => new { });
 
@@ -89,7 +89,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnFailedResult_ReturnsIQueryResult_WithIsFailureSetToTrue()
+        public void Map_OnFailedResult_ReturnsQueryResult_WithIsFailureSetToTrue()
         {
             var result = QueryResult<object>.Fail().Map(x => new { });
 
@@ -97,7 +97,7 @@ namespace SimpleFunctionalExtensionsTests
         }
 
         [Fact]
-        public void Map_OnFailedResult_ReturnsIQueryResult_WithNullValue()
+        public void Map_OnFailedResult_ReturnsQueryResult_WithNullValue()
         {
             var result = QueryResult<object>.Fail().Map(x => new { });
 

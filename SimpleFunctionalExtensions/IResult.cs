@@ -6,12 +6,12 @@
     public interface IResult
     {
         /// <summary>
-        /// Gets whether this <see cref="ICommandResult"/> is a success.
+        /// Gets whether this <see cref="CommandResult"/> is a success.
         /// </summary>
         bool IsSuccess { get; }
 
         /// <summary>
-        /// Gets whether this <see cref="ICommandResult"/> is a failure.
+        /// Gets whether this <see cref="CommandResult"/> is a failure.
         /// </summary>
         bool IsFailure { get; }
     }
