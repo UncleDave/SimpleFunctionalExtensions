@@ -47,6 +47,13 @@ namespace SimpleFunctionalExtensions
             return result.Catch(errorHandler);
         }
 
+        public static async Task<CommandResult<T>> CatchAsync<T>(this Task<CommandResult<T>> task, Func<CommandResult<T>> errorHandler)
+        {
+            var result = await task;
+
+            return result.Catch(errorHandler);
+        }
+
         public static async Task<QueryResult<T>> CatchAsync<T>(this Task<QueryResult<T>> task, Func<QueryResult<T>> errorHandler)
         {
             var result = await task;
@@ -55,6 +62,13 @@ namespace SimpleFunctionalExtensions
         }
 
         public static async Task<QueryResult<TValue, TError>> CatchAsync<TValue, TError>(this Task<QueryResult<TValue, TError>> task, Func<TError, QueryResult<TValue, TError>> errorHandler)
+        {
+            var result = await task;
+
+            return result.Catch(errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchAsync<TValue, TError>(this Task<QueryResult<TValue, TError>> task, Func<QueryResult<TValue, TError>> errorHandler)
         {
             var result = await task;
 
