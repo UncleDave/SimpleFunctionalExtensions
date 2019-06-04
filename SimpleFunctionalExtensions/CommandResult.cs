@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace SimpleFunctionalExtensions
@@ -21,7 +20,9 @@ namespace SimpleFunctionalExtensions
         /// <returns>A new <see cref="CommandResult"/> in the failure state.</returns>
         public static CommandResult Fail() => new CommandResult(false);
 
-        public QueryResult<T> ToQueryResult<T>(T value) => IsSuccess ? QueryResult<T>.Ok(value) : QueryResult<T>.Fail();
+        public QueryResult<T> ToQueryResult<T>(T value) => IsSuccess ? value : QueryResult<T>.Fail();
+
+        public QueryResult<T> ToQueryResult<T>(Func<T> value) => IsSuccess ? value() : QueryResult<T>.Fail();
 
         public CommandResult Catch(Func<CommandResult> errorHandler) => IsFailure ? errorHandler() : this;
 
@@ -48,7 +49,9 @@ namespace SimpleFunctionalExtensions
         /// <returns>A new <see cref="CommandResult"/> in the failure state with the given error.</returns>
         public static CommandResult<T> Fail(T error) => new CommandResult<T>(error);
 
-        public QueryResult<TResult, T> ToQueryResult<TResult>(TResult value) => IsSuccess ? QueryResult<TResult, T>.Ok(value) : QueryResult<TResult, T>.Fail(Error);
+        public QueryResult<TResult, T> ToQueryResult<TResult>(TResult value) => IsSuccess ? value : QueryResult<TResult, T>.Fail(Error);
+
+        public QueryResult<TResult, T> ToQueryResult<TResult>(Func<TResult> value) => IsSuccess ? value() : QueryResult<TResult, T>.Fail(Error);
 
         public CommandResult<T> Catch(Func<T, CommandResult<T>> errorHandler) => IsFailure ? errorHandler(Error) : this;
 

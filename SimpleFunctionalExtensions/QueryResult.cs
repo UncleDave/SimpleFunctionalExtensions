@@ -35,7 +35,7 @@ namespace SimpleFunctionalExtensions
         public static QueryResult<TValue, TError> Fail(TError error) => new QueryResult<TValue, TError>(error);
 
         public QueryResult<TResult, TError> Map<TResult>(Func<TValue, TResult> mapper) =>
-            IsSuccess ? new QueryResult<TResult, TError>(mapper(Value)) : new QueryResult<TResult, TError>(Error);
+            IsSuccess ? mapper(Value) : new QueryResult<TResult, TError>(Error);
 
         public QueryResult<TValue, TError> Catch(Func<TError, QueryResult<TValue, TError>> errorHandler) => IsFailure ? errorHandler(Error) : this;
 

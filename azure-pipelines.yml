@@ -1,5 +1,5 @@
 variables:
-  version: 0.4.2
+  version: 0.4.3
 
 pool:
   vmImage: windows-2019
