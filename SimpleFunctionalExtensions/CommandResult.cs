@@ -1,4 +1,6 @@
-﻿namespace SimpleFunctionalExtensions
+﻿using System;
+
+namespace SimpleFunctionalExtensions
 {
     /// <inheritdoc cref="IResult"/>
     public class CommandResult : Result
@@ -18,6 +20,8 @@
         public static CommandResult Fail() => new CommandResult(false);
 
         public QueryResult<T> ToQueryResult<T>(T value) => IsSuccess ? QueryResult<T>.Ok(value) : QueryResult<T>.Fail();
+
+        public CommandResult Catch(Func<CommandResult> errorHandler) => IsFailure ? errorHandler() : this;
     }
 
     /// <inheritdoc cref="IErrorResult{T}"/>
@@ -41,5 +45,13 @@
         public static CommandResult<T> Fail(T error) => new CommandResult<T>(error);
 
         public QueryResult<TResult, T> ToQueryResult<TResult>(TResult value) => IsSuccess ? QueryResult<TResult, T>.Ok(value) : QueryResult<TResult, T>.Fail(Error);
+
+        public CommandResult<T> Catch(Func<T, CommandResult<T>> errorHandler) => IsFailure ? errorHandler(Error) : this;
+
+        public CommandResult<T> Catch(Func<CommandResult<T>> errorHandler) => IsFailure ? errorHandler() : this;
+
+        public CommandResult<T> CatchWhen(Func<T, bool> condition, Func<T, CommandResult<T>> errorHandler) => IsFailure && condition(Error) ? errorHandler(Error) : this;
+
+        public CommandResult<T> CatchWhen(Func<T, bool> condition, Func<CommandResult<T>> errorHandler) => IsFailure && condition(Error) ? errorHandler() : this;
     }
 }
