@@ -26,7 +26,21 @@ namespace SimpleFunctionalExtensions
             return result.ToQueryResult(value);
         }
 
+        public static async Task<QueryResult<T>> ToQueryResultAsync<T>(this Task<CommandResult> task, Func<T> value)
+        {
+            var result = await task;
+
+            return result.ToQueryResult(value);
+        }
+
         public static async Task<QueryResult<TResult, TError>> ToQueryResultAsync<TResult, TError>(this Task<CommandResult<TError>> task, TResult value)
+        {
+            var result = await task;
+
+            return result.ToQueryResult(value);
+        }
+
+        public static async Task<QueryResult<TResult, TError>> ToQueryResultAsync<TResult, TError>(this Task<CommandResult<TError>> task, Func<TResult> value)
         {
             var result = await task;
 
