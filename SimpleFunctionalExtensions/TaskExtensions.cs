@@ -74,5 +74,39 @@ namespace SimpleFunctionalExtensions
 
             return result.Catch(errorHandler);
         }
+
+        public static async Task<CommandResult<T>> CatchWhenAsync<T>(this Task<CommandResult<T>> task, Func<T, bool> condition, Func<T, CommandResult<T>> errorHandler)
+        {
+            var result = await task;
+
+            return result.CatchWhen(condition, errorHandler);
+        }
+
+        public static async Task<CommandResult<T>> CatchWhenAsync<T>(this Task<CommandResult<T>> task, Func<T, bool> condition, Func<CommandResult<T>> errorHandler)
+        {
+            var result = await task;
+
+            return result.CatchWhen(condition, errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchWhenAsync<TValue, TError>(
+            this Task<QueryResult<TValue, TError>> task,
+            Func<TError, bool> condition,
+            Func<TError, QueryResult<TValue, TError>> errorHandler)
+        {
+            var result = await task;
+
+            return result.CatchWhen(condition, errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchWhenAsync<TValue, TError>(
+            this Task<QueryResult<TValue, TError>> task,
+            Func<TError, bool> condition,
+            Func<QueryResult<TValue, TError>> errorHandler)
+        {
+            var result = await task;
+
+            return result.CatchWhen(condition, errorHandler);
+        }
     }
 }
