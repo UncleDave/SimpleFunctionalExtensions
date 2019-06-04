@@ -54,6 +54,27 @@ namespace SimpleFunctionalExtensions
             return result.Catch(errorHandler);
         }
 
+        public static async Task<CommandResult> CatchAsync(this Task<CommandResult> task, Func<Task<CommandResult>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
+        public static async Task<CommandResult<T>> CatchAsync<T>(this Task<CommandResult<T>> task, Func<T, Task<CommandResult<T>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
+        public static async Task<CommandResult<T>> CatchAsync<T>(this Task<CommandResult<T>> task, Func<Task<CommandResult<T>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
         public static async Task<QueryResult<T>> CatchAsync<T>(this Task<QueryResult<T>> task, Func<QueryResult<T>> errorHandler)
         {
             var result = await task;
@@ -75,6 +96,27 @@ namespace SimpleFunctionalExtensions
             return result.Catch(errorHandler);
         }
 
+        public static async Task<QueryResult<T>> CatchAsync<T>(this Task<QueryResult<T>> task, Func<Task<QueryResult<T>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchAsync<TValue, TError>(this Task<QueryResult<TValue, TError>> task, Func<TError, Task<QueryResult<TValue, TError>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchAsync<TValue, TError>(this Task<QueryResult<TValue, TError>> task, Func<Task<QueryResult<TValue, TError>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchAsync(errorHandler);
+        }
+
         public static async Task<CommandResult<T>> CatchWhenAsync<T>(this Task<CommandResult<T>> task, Func<T, bool> condition, Func<T, CommandResult<T>> errorHandler)
         {
             var result = await task;
@@ -87,6 +129,20 @@ namespace SimpleFunctionalExtensions
             var result = await task;
 
             return result.CatchWhen(condition, errorHandler);
+        }
+
+        public static async Task<CommandResult<T>> CatchWhenAsync<T>(this Task<CommandResult<T>> task, Func<T, bool> condition, Func<T, Task<CommandResult<T>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchWhenAsync(condition, errorHandler);
+        }
+
+        public static async Task<CommandResult<T>> CatchWhenAsync<T>(this Task<CommandResult<T>> task, Func<T, bool> condition, Func<Task<CommandResult<T>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchWhenAsync(condition, errorHandler);
         }
 
         public static async Task<QueryResult<TValue, TError>> CatchWhenAsync<TValue, TError>(
@@ -107,6 +163,26 @@ namespace SimpleFunctionalExtensions
             var result = await task;
 
             return result.CatchWhen(condition, errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchWhenAsync<TValue, TError>(
+            this Task<QueryResult<TValue, TError>> task,
+            Func<TError, bool> condition,
+            Func<TError, Task<QueryResult<TValue, TError>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchWhenAsync(condition, errorHandler);
+        }
+
+        public static async Task<QueryResult<TValue, TError>> CatchWhenAsync<TValue, TError>(
+            this Task<QueryResult<TValue, TError>> task,
+            Func<TError, bool> condition,
+            Func<Task<QueryResult<TValue, TError>>> errorHandler)
+        {
+            var result = await task;
+
+            return await result.CatchWhenAsync(condition, errorHandler);
         }
     }
 }

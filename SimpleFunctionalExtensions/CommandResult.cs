@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace SimpleFunctionalExtensions
 {
@@ -22,6 +24,8 @@ namespace SimpleFunctionalExtensions
         public QueryResult<T> ToQueryResult<T>(T value) => IsSuccess ? QueryResult<T>.Ok(value) : QueryResult<T>.Fail();
 
         public CommandResult Catch(Func<CommandResult> errorHandler) => IsFailure ? errorHandler() : this;
+
+        public Task<CommandResult> CatchAsync(Func<Task<CommandResult>> errorHandler) => IsFailure ? errorHandler() : Task.FromResult(this);
     }
 
     /// <inheritdoc cref="IErrorResult{T}"/>
@@ -53,5 +57,15 @@ namespace SimpleFunctionalExtensions
         public CommandResult<T> CatchWhen(Func<T, bool> condition, Func<T, CommandResult<T>> errorHandler) => IsFailure && condition(Error) ? errorHandler(Error) : this;
 
         public CommandResult<T> CatchWhen(Func<T, bool> condition, Func<CommandResult<T>> errorHandler) => IsFailure && condition(Error) ? errorHandler() : this;
+
+        public Task<CommandResult<T>> CatchAsync(Func<T, Task<CommandResult<T>>> errorHandler) => IsFailure ? errorHandler(Error) : Task.FromResult(this);
+
+        public Task<CommandResult<T>> CatchAsync(Func<Task<CommandResult<T>>> errorHandler) => IsFailure ? errorHandler() : Task.FromResult(this);
+
+        public Task<CommandResult<T>> CatchWhenAsync(Func<T, bool> condition, Func<T, Task<CommandResult<T>>> errorHandler) =>
+            IsFailure && condition(Error) ? errorHandler(Error) : Task.FromResult(this);
+
+        public Task<CommandResult<T>> CatchWhenAsync(Func<T, bool> condition, Func<Task<CommandResult<T>>> errorHandler) =>
+            IsFailure && condition(Error) ? errorHandler() : Task.FromResult(this);
     }
 }

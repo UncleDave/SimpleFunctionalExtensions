@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace SimpleFunctionalExtensions
 {
@@ -15,6 +16,8 @@ namespace SimpleFunctionalExtensions
         public QueryResult<TResult> Map<TResult>(Func<T, TResult> mapper) => IsSuccess ? new QueryResult<TResult>(mapper(Value)) : new QueryResult<TResult>();
 
         public QueryResult<T> Catch(Func<QueryResult<T>> errorHandler) => IsFailure ? errorHandler() : this;
+
+        public Task<QueryResult<T>> CatchAsync(Func<Task<QueryResult<T>>> errorHandler) => IsFailure ? errorHandler() : Task.FromResult(this);
 
         public static implicit operator QueryResult<T>(T value) => new QueryResult<T>(value);
     }
@@ -43,6 +46,16 @@ namespace SimpleFunctionalExtensions
 
         public QueryResult<TValue, TError> CatchWhen(Func<TError, bool> condition, Func<QueryResult<TValue, TError>> errorHandler) =>
             IsFailure && condition(Error) ? errorHandler() : this;
+
+        public Task<QueryResult<TValue, TError>> CatchAsync(Func<TError, Task<QueryResult<TValue, TError>>> errorHandler) => IsFailure ? errorHandler(Error) : Task.FromResult(this);
+
+        public Task<QueryResult<TValue, TError>> CatchAsync(Func<Task<QueryResult<TValue, TError>>> errorHandler) => IsFailure ? errorHandler() : Task.FromResult(this);
+
+        public Task<QueryResult<TValue, TError>> CatchWhenAsync(Func<TError, bool> condition, Func<TError, Task<QueryResult<TValue, TError>>> errorHandler) =>
+            IsFailure && condition(Error) ? errorHandler(Error) : Task.FromResult(this);
+
+        public Task<QueryResult<TValue, TError>> CatchWhenAsync(Func<TError, bool> condition, Func<Task<QueryResult<TValue, TError>>> errorHandler) =>
+            IsFailure && condition(Error) ? errorHandler() : Task.FromResult(this);
 
         public static implicit operator QueryResult<TValue, TError>(TValue value) => new QueryResult<TValue, TError>(value);
     }
